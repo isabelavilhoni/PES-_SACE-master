@@ -1,0 +1,107 @@
+CREATE DATABASE IF NOT EXISTS `sge`;
+USE `sge`;
+
+CREATE TABLE IF NOT EXISTS `periodos_letivos` (
+  `id_periodo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `ano_letivo` int(11) NOT NULL,
+  `data_inicio` date NOT NULL,
+  `data_fim` date NOT NULL,
+  `ativo` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id_periodo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `calendario` (
+  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+  `id_periodo` int(11) DEFAULT NULL,
+  `data_evento` date NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `tipo_evento` enum('Feriado', 'Recesso', 'Dia Letivo', 'Avaliação', 'Outros') NOT NULL,
+  PRIMARY KEY (`id_evento`),
+  FOREIGN KEY (`id_periodo`) REFERENCES `periodos_letivos` (`id_periodo`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `turma` (
+  `id_turma` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_turma` varchar(50) NOT NULL,
+  `id_periodo` int(11) NOT NULL,
+  `ativo` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`id_turma`),
+  FOREIGN KEY (`id_periodo`) REFERENCES `periodos_letivos` (`id_periodo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `aluno` (
+  `id_aluno` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_completo` varchar(255) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `matricula` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_aluno`),
+  UNIQUE KEY `cpf` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `matricula` (
+  `id_matricula` int(11) NOT NULL AUTO_INCREMENT,
+  `id_aluno` int(11) NOT NULL,
+  `id_turma` int(11) NOT NULL,
+  `situacao` enum('Ativo', 'Trancado', 'Aprovado', 'Reprovado', 'Em Recuperação') DEFAULT 'Ativo',
+  PRIMARY KEY (`id_matricula`),
+  FOREIGN KEY (`id_aluno`) REFERENCES `aluno` (`id_aluno`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_turma`) REFERENCES `turma` (`id_turma`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `disciplina` (
+  `id_disciplina` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `carga_horaria` int(11) NOT NULL,
+  `ativo` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`id_disciplina`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(100) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `perfil` enum('Coordenacao','Secretaria','Professor') NOT NULL,
+  `ativo` tinyint(1) DEFAULT 1,
+  `nome_completo` varchar(255) DEFAULT NULL,
+  `cpf` varchar(14) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `alocacao` (
+  `id_alocacao` int(11) NOT NULL AUTO_INCREMENT,
+  `id_turma` int(11) NOT NULL,
+  `id_professor` int(11) NOT NULL,
+  `id_disciplina` int(11) NOT NULL,
+  PRIMARY KEY (`id_alocacao`),
+  FOREIGN KEY (`id_turma`) REFERENCES `turma` (`id_turma`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_professor`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `nota` (
+  `id_nota` int(11) NOT NULL AUTO_INCREMENT,
+  `id_matricula` int(11) NOT NULL,
+  `id_disciplina` int(11) NOT NULL,
+  `bimestre` int(11) NOT NULL,
+  `valor` decimal(5,2) NOT NULL,
+  PRIMARY KEY (`id_nota`),
+  FOREIGN KEY (`id_matricula`) REFERENCES `matricula` (`id_matricula`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `frequencia` (
+  `id_frequencia` int(11) NOT NULL AUTO_INCREMENT,
+  `id_matricula` int(11) NOT NULL,
+  `id_disciplina` int(11) NOT NULL,
+  `bimestre` int(11) NOT NULL,
+  `total_faltas` int(11) NOT NULL,
+  PRIMARY KEY (`id_frequencia`),
+  FOREIGN KEY (`id_matricula`) REFERENCES `matricula` (`id_matricula`) ON DELETE CASCADE,
+  FOREIGN KEY (`id_disciplina`) REFERENCES `disciplina` (`id_disciplina`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
