@@ -1,0 +1,886 @@
+/* index.css - Versão Limpa */
+
+:root {
+  --primary-blue: #003399;
+  --primary-light: #0055ff;
+  --icon-dark: #04225c;
+  --header-bg: #f3fbff;
+  --sidebar-bg: #f3fbff;
+  --content-bg: #ffffff;
+
+  --table-header: #d1e3ff;
+  --danger: #e63946;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--content-bg);
+  color: #333;
+}
+
+/* ESTRUTURA GERAL */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 300px;
+  background-color: var(--sidebar-bg);
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar-brand {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 15px; /* Reduzi levemente o padding lateral para sobrar mais espaço para o texto */
+  border-bottom: 1px solid var(--border-color);
+}
+
+.school-logo-img {
+  width: 120px; /* Tamanho do logo ajustado */
+  height: auto;
+  object-fit: contain;
+}
+
+/* Ajuste das linhas de texto */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  white-space: nowrap; /* CRÍTICO: Impede que o texto quebre para a linha de baixo */
+}
+
+.logo-line-1 {
+  font-weight: 900 !important; /* !important garante que sobrescreva qualquer outra cor */
+  color: #000000 !important; /* Cor preta pura */
+  font-size: 30px !important;
+}
+
+/* "AO CONTROLE ESCOLAR" - Azul #063a9e e mais grosso */
+.logo-line-2 {
+  font-weight: 900 !important; /* Letra grossa */
+  color: #063a9e !important; /* Azul específico solicitado */
+  font-size: 30px !important;
+}
+
+.sidebar-brand h3 {
+  color: var(--primary-blue);
+  margin: 0;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 25px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 25px;
+  transition: 0.5s;
+}
+
+.sidebar-nav a .material-symbols-outlined {
+  color: var(--icon-dark);
+}
+
+.sidebar-nav a:hover {
+  background-color: #e8f4ff;
+}
+
+.sidebar-nav a.active {
+  background-color: var(--primary-blue);
+  color: white !important;
+}
+
+.sidebar-nav a.active .material-symbols-outlined {
+  color: white;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px; /* Alinhado com a nova largura da sidebar */
+  min-height: 100vh;
+  width: calc(
+    100% - 300px
+  ); /* Garante que ocupe exatamente o restante da tela */
+  flex: 1;
+}
+
+/* HEADER */
+.top-header {
+  height: 100px; /* Deixe com a mesma altura da sidebar-brand para alinhar o olhar  */
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Agora só sobra o "Olá, coordenação" na direita */
+  padding: 0 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-line-1 {
+  font-weight: 800;
+  color: var(--primary-blue);
+  font-size: 16px;
+}
+
+.logo-line-2 {
+  font-weight: 600;
+  color: var(--primary-light);
+  font-size: 16px;
+}
+
+/* ÁREA DA PÁGINA */
+.page-body {
+  padding: 40px;
+  background-color: #fcfdfe;
+  flex: 1;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #04225c;
+  margin: 0;
+}
+
+/* CARDS */
+.content-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* FORMULÁRIOS */
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.form-group input {
+  padding: 12px;
+  height: 50px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 19px;
+}
+
+.required-star {
+  color: #e63946;
+  font-size: 20px;
+  margin-left: 4px;
+}
+
+.form-divider {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 30px 0;
+  height: 1px;
+  background-color: #dcdcdc; /* cinza claro */
+
+  width: 100%; /* não encosta nas laterais */
+  margin: 50px auto; /* espaço em cima/baixo e centraliza */
+}
+
+/* BOTÕES */
+.btn-save {
+  font-size: 20px;
+  background-color: var(--primary-blue);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #002570;
+}
+
+.btn-back {
+  font-size: 20px;
+  background-color: white;
+  color: #333;
+  padding: 12px 24px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-new-discipline {
+  /* Cores */
+  background-color: #063a9e; /* O azul que você usou no logo */
+  color: white;
+  border: none;
+
+  /* Tamanho e Espaçamento */
+  padding: 18px 28px; /* Aumenta o "corpo" do botão */
+  font-size: 18px; /* Aumenta o tamanho da letra */
+  font-weight: 700; /* Deixa a letra mais grossa/negrito */
+
+  border-radius: 8px; /* Bordas arredondadas modernas */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espaço caso você coloque um ícone de + */
+  transition: all 0.3s ease; /* Efeito suave ao passar o mouse */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+}
+
+/* O botão (o círculo/quadrado em volta do ícone) */
+.btn-icon {
+  width: 55px; /* Aumentei de ~30px para 45px */
+  height: 55px; /* Aumentei para manter o círculo perfeito */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* Bordas levemente arredondadas */
+  border: 1px solid #e3e6f0; /* Uma bordinha fina para dar acabamento */
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* O ícone dentro do botão (o desenho da caneta e do lixo) */
+.btn-icon .material-symbols-outlined {
+  font-size: 35px !important; /* Aumentei o desenho para 28px */
+}
+
+/* Efeito ao passar o mouse para ficar mais profissional */
+.btn-icon:hover {
+  background-color: #f8f9fc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* TABELA */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th {
+  background-color: var(--table-header);
+  font-size: 22px !important;
+  padding: 15px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid #c2dcff;
+}
+
+.custom-table td {
+  font-size: 20px;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Seleciona as linhas pares (2, 4, 6...) da tabela */
+.custom-table tbody tr:nth-child(even) {
+  background-color: #e3e8f1;
+}
+
+/* Garante que as linhas ímpares (1, 3, 5...) fiquem brancas */
+.custom-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente (alinha com a palavra Ações) */
+  align-items: center; /* Centraliza verticalmente */
+  gap: 12px; /* Espaço entre o botão de editar e excluir */
+  padding: 8px 15px;
+  height: 100%; /* Garante que ocupe a altura da linha */
+}
+
+/* Garante que o th de ações também esteja centralizado */
+.custom-table th:last-child {
+  text-align: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%; /* Faz o container ocupar a largura total do card */
+  max-width: 600px; /* Define o comprimento máximo (ajuste se quiser mais comprido) */
+  margin-top: 10px;
+}
+
+/* Estilo da Lupa */
+.search-icon {
+  position: absolute;
+  left: 15px; /* Distância da borda esquerda */
+  color: #888; /* Cor cinza para a lupa */
+  font-size: 24px !important;
+  pointer-events: none; /* Garante que clicar na lupa clique no input */
+}
+
+/* O Campo de Texto (Input) */
+.search-input-large {
+  width: 900px;
+  padding: 12px 12px 12px 50px; /* O padding de 50px na esquerda dá espaço para a lupa */
+  font-size: 18px;
+  border: 2px solid #e3e6f0;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Efeito de destaque ao clicar no campo */
+.search-input-large:focus {
+  border-color: #003399; /* Cor do seu sistema ao focar */
+  box-shadow: 0 0 8px rgba(0, 51, 153, 0.1);
+}
+
+/* Essa classe controla a linha inteira */
+.form-row {
+  display: flex;
+  gap: 20px; /* Espaço horizontal entre os campos da mesma linha */
+  margin-bottom: 60px; /* Aumente aqui para dar distância para a linha de baixo */
+}
+
+/* Opcional: Ajuste para os grupos de input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espaço entre o <label> e o <input> */
+}
+
+/* =========================================
+   TELA DE LOGIN
+========================================= */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--header-bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #d1e3ff;
+}
+
+.login-logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-logo-title {
+  color: var(--primary-blue);
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0 0 5px 0;
+}
+
+.login-logo-subtitle {
+  color: #737373;
+  margin: 0;
+  font-size: 16px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error-box {
+  padding: 12px;
+  background-color: #ffe6e6;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.login-btn {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #002570;
+}
+
+.login-btn:disabled {
+  background-color: #8099cc;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   TELA INÍCIO (HOME)
+========================================= */
+.inicio-header {
+  margin-bottom: 30px;
+}
+
+.inicio-title {
+  margin-bottom: 5px;
+}
+
+.inicio-subtitle {
+  margin: 0;
+  font-size: 18px;
+  color: #737373;
+  font-weight: 500;
+}
+
+.inicio-card-custom {
+  border-left: 5px solid var(--primary-blue);
+}
+
+.inicio-card-title {
+  color: var(--primary-blue);
+  margin-top: 0;
+}
+
+.inicio-card-text {
+  font-size: 18px;
+  color: #333;
+}
+
+.inicio-card-desc {
+  font-size: 16px;
+  color: #666;
+  margin-top: 15px;
+}
+/* =========================================
+   CABEÇALHO E BOTÃO DE SAIR (LAYOUT)
+========================================= */
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-user-icon {
+  font-size: 40px;
+  color: var(--primary-blue);
+}
+
+.header-user-greeting {
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #ffe6e6;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: var(--danger);
+  color: #fff;
+}
+
+.btn-logout .material-symbols-outlined {
+  font-size: 20px;
+}
+/* =========================================
+   MENU DE USUÁRIO (DROPDOWN)
+========================================= */
+.user-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  user-select: none;
+  color: var(--primary-blue);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.user-menu-trigger:hover {
+  background-color: #e8f4ff;
+}
+
+.user-menu-trigger .material-symbols-outlined {
+  font-size: 32px; /* Aumenta um pouco o ícone do bonequinho */
+}
+
+/* A setinha de abrir/fechar */
+.user-menu-trigger .seta {
+  font-size: 24px;
+  color: #333;
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 10px); /* Descola um pouquinho do cabeçalho */
+  right: 0;
+  width: 200px;
+  background-color: #ffffff;
+  border: 1px solid #d1e3ff; /* Usando o azul clarinho que você já tem */
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 51, 153, 0.1);
+  padding: 8px;
+  z-index: 9999;
+}
+
+/* Forçando o botão a perder a cara de botão feio do navegador */
+button.btn-logout-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  padding: 12px 15px !important;
+  border: none !important;
+  outline: none !important;
+  background-color: transparent !important;
+  color: #e63946 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  transition: background-color 0.2s !important;
+  text-align: left !important;
+  font-family: inherit !important;
+}
+
+button.btn-logout-item:hover {
+  background-color: #ffe6e6 !important;
+}
+
+button.btn-logout-item .material-symbols-outlined {
+  font-size: 22px !important;
+}
+/* =========================================
+   ESTILOS GERAIS DAS PÁGINAS (Títulos e Layout)
+   ========================================= */
+.page-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  margin-bottom: 5px;
+  color: var(--primary-blue, #002060);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.page-description {
+  color: #737373;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* =========================================
+   BOTÕES GERAIS
+   ========================================= */
+.btn-primary {
+  background-color: var(--primary-blue, #003399);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-danger {
+  color: var(--danger, #dc3545);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-icon {
+  color: var(--primary-blue, #003399);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* =========================================
+   TABELAS
+   ========================================= */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th {
+  padding: 12px;
+  border-bottom: 2px solid #c2daff;
+  background-color: #e8f4ff;
+  text-align: left;
+}
+
+.custom-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.text-muted {
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* =========================================
+   FORMULÁRIO DE VÍNCULO (GRADE)
+   ========================================= */
+.grade-form {
+  background-color: #f8fafd;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #c2daff;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.grade-form-group {
+  flex: 1;
+}
+
+.grade-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--primary-blue, #002060);
+}
+
+.grade-form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+/* =========================================
+   DASHBOARD (INÍCIO)
+   ========================================= */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #e0e6ed;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+/* Cores dos Ícones */
+.icon-blue {
+  background-color: #e8f4ff;
+  color: #003399;
+}
+.icon-green {
+  background-color: #e6fffa;
+  color: #2d8a6e;
+}
+.icon-orange {
+  background-color: #fff7ed;
+  color: #c2410c;
+}
+
+.stat-info h3 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.stat-info p {
+  margin: 0;
+  color: #737373;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.welcome-section {
+  margin-bottom: 30px;
+}
+/* =========================================
+   LOGO E IDENTIDADE (SIDEBAR) - VERSÃO FINAL
+   ========================================= */
+.sidebar-brand {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 20px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+  background-color: var(--sidebar-bg);
+}
+
+.logo-img {
+  width: 70px; /* Tamanho aumentado para destaque igual à imagem */
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* "SISTEMA DE APOIO" - Preto e Grande */
+.logo-line-1 {
+  font-weight: 900 !important;
+  color: #000000 !important;
+  font-size: 18px !important; /* 30px era muito grande, 18px equilibra com a logo */
+  letter-spacing: -0.5px;
+}
+
+/* "AO CONTROLE ESCOLAR" - Azul Específico e Grande */
+.logo-line-2 {
+  font-weight: 900 !important;
+  color: #063a9e !important;
+  font-size: 18px !important;
+  letter-spacing: -0.5px;
+}
